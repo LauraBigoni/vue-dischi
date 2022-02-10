@@ -2,9 +2,9 @@
 	<div id="app">
 		<Header />
 		<main>
-      <Dischi/>
-    </main>
-    <Footer />
+			<Dischi />
+		</main>
+		<Footer />
 	</div>
 </template>
 
@@ -17,8 +17,8 @@ export default {
 	name: "App",
 	components: {
 		Header,
-    Dischi,
-    Footer
+		Dischi,
+		Footer,
 	},
 };
 </script>

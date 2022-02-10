@@ -2,7 +2,7 @@
 	<header>
         <div class="row m-0">
             <div class="col d-flex justify-content-center align-items-center">
-                <i class="fab fa-spotify"></i>
+                <i class="fab fa-spotify" role="button"></i>
             </div>
         </div>
     </header>
