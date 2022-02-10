@@ -2,20 +2,7 @@
 	<div class="container dischi">
 		<div class="row text-center">
 			<div class="col">
-				<div
-					id="loader"
-					class="
-						text-center
-						flex-column
-						d-flex
-						justify-content-center
-						align-items-center
-					"
-					v-if="isLoading"
-				>
-					<i class="fa-solid fa-spinner"></i> <br />
-					<span>LOADING...</span>
-				</div>
+				<Loader v-if="isLoading"/>
 				<ul
 					v-else
 					class="
@@ -41,8 +28,12 @@
 <script>
 import axios from "axios";
 
+import Loader from './Loader.vue';
 export default {
 	name: "Dischi",
+	components: {
+		Loader,
+	},
 	data() {
 		return {
 			isLoading: false,
@@ -85,22 +76,6 @@ export default {
 	p {
 		text-transform: uppercase;
 		font-weight: 700;
-	}
-}
-#loader {
-	padding: 300px 0;
-	letter-spacing: 10px;
-	.fa-spinner {
-		font-size: 40px;
-		animation: rotate 2s infinite linear;
-	}
-	@keyframes rotate {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
 	}
 }
 </style>
