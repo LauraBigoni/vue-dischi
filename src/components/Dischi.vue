@@ -2,7 +2,21 @@
 	<div class="container dischi">
 		<div class="row text-center">
 			<div class="col">
-				<Loader v-if="isLoading"/>
+				<select
+					v-model="genres"
+					class="form-select"
+					@change="$emit('change-genre', genres)"
+				>
+					<option value="all">Search genre</option>
+					<option
+						v-for="(product, index) in filterGenres()"
+						:key="index"
+						:value="product"
+					>
+						{{ product }}
+					</option>
+				</select>
+				<Loader v-if="isLoading" />
 				<ul
 					v-else
 					class="
@@ -13,7 +27,7 @@
 						align-items-start
 					"
 				>
-					<li v-for="cd in music" :key="cd.author">
+					<li v-for="cd in removeDuplicates" :key="cd.author">
 						<img class="img-fluid" :src="cd.poster" :alt="cd.title" />
 						<p class="h5 pt-2">{{ cd.title }}</p>
 						<p class="m-0">{{ cd.author }}</p>
@@ -28,7 +42,7 @@
 <script>
 import axios from "axios";
 
-import Loader from './Loader.vue';
+import Loader from "./Loader.vue";
 export default {
 	name: "Dischi",
 	components: {
@@ -38,8 +52,17 @@ export default {
 		return {
 			isLoading: false,
 			music: [],
+			genres: "all",
 			api: "https://flynn.boolean.careers/exercises/api/array/music",
 		};
+	},
+	computed: {
+		removeDuplicates() {
+			return this.music.filter((el) => {
+				if (this.genres == el.genre || el.genre == "" || this.genres == "all")
+					return true;
+			});
+		},
 	},
 	methods: {
 		getMusic(url) {
@@ -50,6 +73,15 @@ export default {
 				console.log(this.music);
 			});
 		},
+		filterGenres() {
+			const filteredMusic = [];
+			this.music.forEach((el) => {
+				if (!filteredMusic.includes(el.genre)) {
+					filteredMusic.push(el.genre);
+				}
+			});
+			return filteredMusic;
+		},
 	},
 	mounted() {
 		this.getMusic(this.api);
@@ -58,6 +90,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.form-select {
+	width: 100px;
+	position: absolute;
+	top: 20px;
+	right: 50px;
+}
 .dischi {
 	ul {
 		padding-top: 30px;

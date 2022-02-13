@@ -2,7 +2,7 @@
 	<div id="app">
 		<Header />
 		<main>
-			<Dischi />
+			<Dischi @change-genre="newTermChange" />
 		</main>
 		<Footer />
 	</div>
@@ -20,6 +20,16 @@ export default {
 		Dischi,
 		Footer,
 	},
+	data() {
+		return {
+			newTerm: '',
+		};
+	},
+	methods: {
+		newTermChange(prop) {
+			this.newTerm = prop;
+		}
+	}
 };
 </script>
 
