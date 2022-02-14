@@ -9,8 +9,8 @@
 				>
 					<option value="all">Search genre</option>
 					<option
-						v-for="(product, index) in filterGenres()"
-						:key="index"
+						v-for="product in filterGenres()"
+						:key="product"
 						:value="product"
 					>
 						{{ product }}
@@ -91,10 +91,10 @@ export default {
 
 <style scoped lang="scss">
 .form-select {
-	width: 100px;
+	width: 200px;
 	position: absolute;
 	top: 20px;
-	right: 50px;
+	right: 420px;
 }
 .dischi {
 	ul {
